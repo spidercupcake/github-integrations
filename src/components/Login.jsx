@@ -1,10 +1,24 @@
-import React, { useState } from "react";
-import "./Login.css"; // Rename SignIn.css to Login.css
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const user = params.get("user");
+    if (user) {
+      const userData = JSON.parse(decodeURIComponent(user));
+      console.log("GitHub login successful:", userData);
+      setSuccess(true);
+      // Here you would typically store the user data in your app's state or context
+    }
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +50,17 @@ function Login() {
     }
   };
 
+  const handleGitHubLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/github/login");
+      const data = await response.json();
+      window.location.href = data.url;
+    } catch (err) {
+      setError("Failed to initiate GitHub login");
+      console.error("Error:", err);
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-box">
@@ -47,7 +72,7 @@ function Login() {
             <span className="google-icon"></span>
             Google
           </button>
-          <button className="github-button">
+          <button className="github-button" onClick={handleGitHubLogin}>
             <span className="github-icon"></span>
             GitHub
           </button>
