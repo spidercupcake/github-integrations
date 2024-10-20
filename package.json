@@ -1,20 +1,24 @@
 {
-  "name": "vanilla-react-template",
+  "name": "profile-page",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
+    "server": "node server/server.js",
     "serve": "serve -s dist"
   },
   "keywords": [],
-  "author": "",
+  "author": "spidercupcake",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",

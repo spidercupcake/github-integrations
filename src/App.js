@@ -1,8 +1,12 @@
 import React from "react";
-export default function App() {
+import Login from "./components/Login";
+
+function App() {
   return (
-    <main>
-      <h1>Hello World.</h1>
+    <main className="App">
+      <Login />
     </main>
   );
 }
+
+export default App;
